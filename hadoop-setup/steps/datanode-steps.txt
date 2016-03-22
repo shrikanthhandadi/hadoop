@@ -1,0 +1,51 @@
+
+-- install java in target host
+sudo apt-add-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get install oracle-java8-installer
+
+-- setup kerberos client. refer kerberos setup guide
+
+-- setup keyless login for hdfs + yarn + mapred using ssh-keygen & ssh-copyid commands for target datanode from namenode
+ ssh-keygen -t rsa
+ ssh-copy-id -i .ssh/id_rsa.pub ubuntu2.exp.com
+ ssh-copy-id -i .ssh/id_rsa.pub ubuntu1.exp.com
+ ssh hdfs@ubuntu1
+ ssh hdfs@ubuntu2
+ 
+ -- copy  hadoop/security + hadoop/fully folders from namenode to new machine
+
+ -- change the permisiion of whole direcory tree to 
+ chown -R  hadoop:root /usr/local/hadoop/fully
+ chown -R 755 
+ 
+ -- update all 3 keytabs to include new target datanode host
+ cd //usr/local/hadoop/secure/keytabs
+addprinc -randkey hdfs/ubuntu2.exp.com@EXP.COM
+addprinc -randkey mapred/ubunt2.exp.com@EXP.COM
+addprinc -randkey yarn/ubuntu2.exp.com@EXP.COM
+addprinc -randkey HTTP/ubuntu2.exp.com@EXP.COM
+
+ktadd  -k hdfs.keytab hdfs/ubuntu2.exp.com HTTP/ubuntu2.exp.com
+ktadd  -k mapred.keytab mapred/ubuntu2.exp.com HTTP/ubuntu2.exp.com
+ktadd  -k yarn.keytab yarn/ubuntu2.exp.com HTTP/ubuntu2.exp.com
+ 
+
+-- change the permisiions of the keytabs to owner of keytabs & 400 permisiion
+
+-- set the permisiion for /bin/container-executor (6050) & /etc/hadoop/container-executor.cfg (400) 
+
+-- make sure the target for data store & namnode store present in target machine
+
+-- edit /usr/local/hadoop/fully/hadoop-2.7.1/etc/hadoop/slaves in namenode machine to include new machine name
+cat slaves
+ubuntu1.exp.com
+ubuntu2.exp.com
+
+--format the namenode & start the cluster using start from the namenode
+
+
+
+
+
+
