@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. See accompanying LICENSE file.
+-->
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+    <property>
+        <name>dfs.replication</name>
+        <value>1</value>
+    </property>
+    <property>
+        <name>dfs.namenode.name.dir</name>
+        <value>/usr/local/hadoop/pseudo/hdfsdata/name</value>
+    </property>
+    <property>
+        <name>dfs.datanode.data.dir</name>
+        <value>/usr/local/hadoop/pseudo/hdfsdata/data</value>
+    </property>
+
+
+<!-- General HDFS security config -->
+    <property>
+        <name>dfs.permissions.superusergroup</name>
+        <value>hadoop</value>
+    </property>
+
+	<!-- NameNode related -->
+	<property>
+        <name>dfs.block.access.token.enable</name>
+        <value>true</value>
+    </property>
+	<property>
+        <name>dfs.http.policy</name>
+        <value>HTTPS_ONLY</value>
+    </property>
+	<property>
+        <name>dfs.namenode.https-address</name>
+        <value>ubuntu1.exp.com:50470</value>
+    </property>
+	<property>
+        <name>dfs.https.port</name>
+        <value>50470</value>
+    </property>
+	<property>
+        <name>dfs.namenode.keytab.file</name>
+        <value>/usr/local/hadoop/secure/keytabs/hdfs.keytab</value>
+    </property>
+	<property>
+        <name>dfs.namenode.kerberos.principal</name>
+        <value>hdfs/_HOST@EXP.COM</value>
+    </property>
+	<property>
+        <name>dfs.namenode.kerberos.internal.spnego.principal</name>
+        <value>HTTP/_HOST@EXP.COM</value>
+    </property>
+
+	<!-- secondary nam related -->
+	<property>
+        <name>dfs.namenode.secondary.http-address</name>
+        <value>ubuntu1.exp.com:50090</value>
+    </property>
+	<property>
+        <name>dfs.namenode.secondary.https-port</name>
+        <value>50475</value>
+    </property>
+	<property>
+        <name>dfs.secondary.namenode.keytab.file</name>
+        <value>/usr/local/hadoop/secure/keytabs/hdfs.keytab</value>
+    </property>
+	<property>
+        <name>dfs.secondary.namenode.kerberos.principal</name>
+        <value>hdfs/_HOST@EXP.COM</value>
+    </property>
+	<property>
+        <name>dfs.secondary.namenode.kerberos.internal.spnego.principal</name>
+        <value>HTTP/_HOST@EXP.COM</value>
+    </property>
+	
+	<!-- datanode security -->
+	<property>
+        <name>dfs.datanode.data.dir.perm</name>
+        <value>700</value>
+    </property>
+	<property>
+        <name>dfs.datanode.address</name>
+        <value>0.0.0.0:11004</value>
+    </property>
+	<property>
+        <name>dfs.datanode.http.address</name>
+        <value>0.0.0.0:11006</value>
+    </property>
+	<property>
+        <name>dfs.datanode.https.address</name>
+        <value>0.0.0.0:50570</value>
+    </property>
+	<property>
+        <name>dfs.datanode.keytab.file</name>
+        <value>/usr/local/hadoop/secure/keytabs/hdfs.keytab</value>
+    </property>
+	<property>
+        <name>dfs.datanode.kerberos.principal</name>
+        <value>hdfs/_HOST@EXP.COM</value>
+    </property>
+	<property>
+        <name>dfs.encrypt.data.transfer</name>
+        <value>false</value>
+    </property>
+	<property>
+        <name>dfs.data.transfer.protection</name>
+        <value>authentication</value>
+</property>
+
+<property>
+  <name>dfs.webhdfs.enabled</name>
+  <value>true</value>
+</property>
+	<property>
+        <name>dfs.web.authentication.kerberos.principal</name>
+        <value>HTTP/ubuntu1.exp.com@EXP.COM</value>
+    </property>
+
+<!--
+	<property>
+        <name>dfs.web.authentication.kerberos.keytab</name>
+        <value>/usr/local/hadoop/secure/keytabs/hdfs.keytab</value>
+    </property>
+-->
+<!--
+	<property>
+        <name>dfs.web.authentication.kerberos.keytab</name>
+        <value>/usr/local/hadoop/secure/keytabs/http.service.keytab</value>
+    </property>
+-->
+
+<property>
+  <name>dfs.https.server.keystore.resource</name>
+  <value>ssl-server.xml</value>
+  <description>Resource file from which ssl server keystore
+  information will be extracted
+  </description>
+</property>
+</configuration>
