@@ -1,0 +1,13 @@
+
+
+Steps
+
+--Packages that we will install during the complete procedure will ask us a series of questions through the so-called debconf interface. To configure debconf to a known state, run:
+sudo dpkg-reconfigure debconf
+When asked, answer interface=Dialog and priority=low.
+
+--Monitoring log files is crucial in detecting problems. The straight-forward, catch-all routine to this is opening a terminal and running:
+
+cd /var/log; sudo tail -F daemon.log sulog user.log auth.log debug kern.log syslog dmesg messages kerberos/{krb5kdc,kadmin,krb5lib}.log
+
+

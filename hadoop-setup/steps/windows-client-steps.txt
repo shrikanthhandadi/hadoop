@@ -1,0 +1,62 @@
+Windows client steps
+
+Windows client needs a build of hadoop's source code in windows environment to work. This takes much effort to do so. 
+So usually you can find someone built & uploaded in internet
+
+--kerberos setup
+Make sure you have right JDK installed & krb5.conf file copied to jre/lib/security folder
+Also verify you are able to execute kinit & klist the generated tickets
+krb5.conf file can be obtained from keberos server installation
+
+Notes:
+You should always usse JDK bundled kinit & klist. You can execute them directly switching over to JDK/bin folder.
+You should generate a forwardable ticket & verify the same. Below is sample
+
+G:\JAVA\JDK\1.7.0_45\bin>kinit -f hduser1@EXP.COM
+Password for hduser1@EXP.COM:
+New ticket is stored in cache file C:\Users\Shrikanth\krb5cc_Shrikanth
+
+G:\JAVA\JDK\1.7.0_45\bin>klist -f -e -c C:\Users\Shrikanth\krb5cc_Shrikanth
+
+Credentials cache: C:\Users\Shrikanth\krb5cc_Shrikanth
+
+Default principal: hduser1@EXP.COM, 1 entry found.
+
+[1]  Service Principal:  krbtgt/EXP.COM@EXP.COM
+     Valid starting:  Mar 22, 2016 09:45
+     Expires:         Mar 22, 2016 19:45
+     Encryption type: DES3 CBC mode with SHA1-KD
+     Flags:           FORWARDABLE;INITIAL;PRE-AUTHENT
+	 
+--
+
+---hadoop set up 
+
+-Copy hadoop installation directly from target server & make sure all *env.sh files contain the right JAVA_HOME location
+
+-Now update the HADOOP_HOME/bin directory with the windows build bin folder should good enough
+URL --
+
+
+You should have list of changes as mentioned below in both server & client (brute force)
+Make sure yarn-site.xml contains the absolute DNS/IP paths as mentioned below
+<property>
+        <name>yarn.resourcemanager.resource-tracker.address</name>
+        <value>ubuntu1.exp.com:8031</value>
+    </property>
+	<property>
+<name>yarn.resourcemanager.address</name>
+<value>ubuntu1.exp.com:8032</value>
+</property>
+<property>
+<name>yarn.resourcemanager.scheduler.address</name>
+<value>ubuntu1.exp.com:8030</value>
+</property>
+
+mapred-site.xml
+<property>
+    <name>mapreduce.app-submission.cross-platform</name>
+    <value>true</value>
+</property>
+
+
