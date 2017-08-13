@@ -2,7 +2,7 @@ Domain we use is EXP.COM, kerberos KDC & Admin server is krbserver.exp.com
 
 ##### kerberos server setup.
 * Add kerberos server as entry for /etc/hosts. Assuming your IP is 192.168.1.151 execute below line.
-``` 
+```shell
 sudo sed -i '3i 192.168.1.151 krbserver.exp.com' /etc/hosts 
 ```
 
