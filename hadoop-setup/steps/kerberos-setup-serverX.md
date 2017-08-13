@@ -16,7 +16,7 @@ Kerberos servers for your realm: krb1.exp.com
 Administrative server for your Kerberos realm: krb1.exp.com  
 Create the Kerberos KDC configuration automatically? Yes  
 //you may get some dialogue here press OK  
-Run the Kerberos V5 administration daemon (kadmind)? Yes  *
+Run the Kerberos V5 administration daemon (kadmind)? Yes*  
 
 * Replace /etc/krb5.conf content with below entry
 ```
