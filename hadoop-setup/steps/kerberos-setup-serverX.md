@@ -6,7 +6,7 @@ Domain we use is EXP.COM, kerberos KDC & Admin server is krbserver.exp.com
 sudo sed -i '3i 192.168.1.151 krbserver.exp.com' /etc/hosts 
 ```
 
-* install kerberos admin server & key distribution center.
+* Install kerberos admin server & key distribution center.
 ```
 sudo apt-get install krb5-admin-server krb5-kdc 
 ```
@@ -42,7 +42,7 @@ sudo sh -c 'echo "[logging]
 ```
 
 	
-* add below content to /etc/krb5kdc/kdc.conf
+* Add below content to /etc/krb5kdc/kdc.conf
 ```
 sudo sh -c 'echo "[kdcdefaults]
 	kdc_ports = 750,88
@@ -69,7 +69,7 @@ sudo sh -c 'echo "[kdcdefaults]
 	default = FILE:/var/log/krb5lib.log
 " > /etc/krb5kdc/kdc.conf'
 ```
-* setup new kerberos realm
+* Setup new kerberos realm
 ``` 
 sudo krb5_newrealm 
 ```
@@ -80,7 +80,7 @@ sudo krb5_newrealm
 sudo sed -i 's/\# \*\/admin \*/\*\/admin \*/g' /etc/krb5kdc/kadm5.acl 
 ```
 
-* restart both admin and kdc servers to set above changes effective
+* Restart both admin and kdc servers to set above changes effective
 ``` 
 sudo invoke-rc.d krb5-admin-server restart 
 sudo invoke-rc.d krb5-kdc restart 
@@ -91,7 +91,7 @@ sudo invoke-rc.d krb5-kdc restart
 cd /var/log; sudo tail -F daemon.log sulog user.log auth.log debug kern.log syslog dmesg messages {krb5kdc,kadmin,krb5lib}.log 
 ```
 
-* add admin login which will enable you to login from remote host
+* Add admin login which will enable you to login from remote host
 ```
 sudo kadmin.local
     addpol -minlength 1 -minclasses 1 admin
@@ -101,19 +101,19 @@ sudo kadmin.local
 ### Client side setups 
 Considering server1.exp.com server2.exp.com server3.exp.com server4.exp.com as list of clients, execute below steps in all servers 
 
-* install kerberos user package
+* Install kerberos user package
 ``` 
 sudo apt-get install krb5-user krb5-config 
 ```
 
-* copy kerberos config file /etc/krb5.conf from kerberos server to similcar location in local server
+* Copy kerberos config file /etc/krb5.conf from kerberos server to similcar location in local server
 ``` 
 sudo scp shrikanth@krbserver.exp.com:/etc/krb5.conf /etc/krb5.conf 
 ```
 
 **SSH related setups**
 
-* install ssh server if already not installed. All the servers will use ssh as the means for connectivity.
+* Install ssh server if already not installed. All the servers will use ssh as the means for connectivity.
 ``` 
 sudo apt-get install openssh-server 
 ```
@@ -141,13 +141,13 @@ sudo kadmin -p kadmin1/admin
 	addprinc -policy host -randkey host/server2.exp.com
 	ktadd -k /etc/krb5.keytab -norandkey host/server2.exp.com
 ```
-* add user also into kerberos database & remember the password
+* Add user also into kerberos database & remember the password
 ```
 sudo kadmin -p kadmin1/admin 
 	addpol -minlength 1 -minclasses 1 user
 	addprinc -policy user kuser1
 ```
-* now add test user kuser1 with special password as '*K*' -this is the indicator that will suggest ssh server to use kerberos for user logins
+* Now add test user kuser1 with special password as '*K*' -this is the indicator that will suggest ssh server to use kerberos for user logins
 ```
 sudo adduser kuser1
 sudo usermod -p '*K*' kuser1
