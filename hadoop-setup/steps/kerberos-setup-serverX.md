@@ -1,6 +1,6 @@
 Domain we use is EXP.COM, kerberos KDC & Admin server is krbserver.exp.com
 
-##### kerberos server setup.
+### kerberos server setup.
 * Add kerberos server as entry for /etc/hosts. Assuming your IP is 192.168.1.151 execute below line.
 ```
 sudo sed -i '3i 192.168.1.151 krbserver.exp.com' /etc/hosts 
@@ -10,13 +10,13 @@ sudo sed -i '3i 192.168.1.151 krbserver.exp.com' /etc/hosts
 ```
 sudo apt-get install krb5-admin-server krb5-kdc 
 ```
-*Default Kerberos version 5 realm? EXP.COM
-Add locations of default Kerberos servers to /etc/krb5.conf? Yes
-Kerberos servers for your realm: krb1.exp.com 
-Administrative server for your Kerberos realm: krb1.exp.com
-Create the Kerberos KDC configuration automatically? Yes
-//you may get some dialogue here press OK
-Run the Kerberos V5 administration daemon (kadmind)? Yes*
+*Default Kerberos version 5 realm? EXP.COM  
+Add locations of default Kerberos servers to /etc/krb5.conf? Yes  
+Kerberos servers for your realm: krb1.exp.com  
+Administrative server for your Kerberos realm: krb1.exp.com  
+Create the Kerberos KDC configuration automatically? Yes  
+//you may get some dialogue here press OK  
+Run the Kerberos V5 administration daemon (kadmind)? Yes  *
 
 * Replace /etc/krb5.conf content with below entry
 ```
@@ -98,7 +98,7 @@ sudo kadmin.local
     addprinc -policy admin kadmin1/admin
 ```
 
-##### Client side setups 
+### Client side setups 
 Considering server1.exp.com server2.exp.com server3.exp.com server4.exp.com as list of clients, execute below steps in all servers 
 
 * install kerberos user package
@@ -130,7 +130,7 @@ sudo sed -i 's/#   GSSAPIAuthentication no/GSSAPIAuthentication yes/g' /etc/ssh/
 sudo sed -i 's/    GSSAPIDelegateCredentials no/    GSSAPIDelegateCredentials yes/g' /etc/ssh/ssh_config 
 ```
 
-##### -------- demo of user authentication using kerberos ---------
+### Demo of user authentication using kerberos
 Lets say user called kuser1 who is local user of server server2.exp.com & he will be logging in from node server3.exp.com. Per kerberos model kuser1 & host server2.exp.com will be addded to kerberos principals & underneath ssh will delegate the login.
 
 **@server2.exp.com**
@@ -159,11 +159,6 @@ sudo usermod -p '*K*' kuser1
 kinit kuser1
 ssh kuser1@server2.exp.com 
 ```
-
-
-
-
-##### --------- hadoop specifics -----------------------------------
 
 
 
