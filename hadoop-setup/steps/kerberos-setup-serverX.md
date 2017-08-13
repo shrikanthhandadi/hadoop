@@ -10,7 +10,7 @@ sudo sed -i '3i 192.168.1.151 krbserver.exp.com' /etc/hosts
 ```
 sudo apt-get install krb5-admin-server krb5-kdc 
 ```
-*Default Kerberos version 5 realm? EXP.COM  </br>
+*Default Kerberos version 5 realm? EXP.COM  
 Add locations of default Kerberos servers to /etc/krb5.conf? Yes  
 Kerberos servers for your realm: krb1.exp.com  
 Administrative server for your Kerberos realm: krb1.exp.com  
