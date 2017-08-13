@@ -1,10 +1,10 @@
 Domain we use is EXP.COM, kerberos KDC & Admin server is krbserver.exp.com
 
-##### kerberos server setup 
-* Add kerberos server as entry for /etc/hosts. Assuming your IP is 192.168.1.151 execute below line
+##### kerberos server setup.
+* Add kerberos server as entry for /etc/hosts. Assuming your IP is 192.168.1.151 execute below line.
 ``` sudo sed -i '3i 192.168.1.151 krbserver.exp.com' /etc/hosts ```
 
-* install kerberos admin server & key distribution center
+* install kerberos admin server & key distribution center.
 ``` sudo apt-get install krb5-admin-server krb5-kdc ```
 *Default Kerberos version 5 realm? EXP.COM
 Add locations of default Kerberos servers to /etc/krb5.conf? Yes
