@@ -1,0 +1,17 @@
+stocks  
+raw -- 
+https://raw.githubusercontent.com/malli3131/HadoopTutorial/master/Data/stocks
+repo -- https://github.com/malli3131/HadoopTutorial/blob/master/Data/stocks
+
+NYSE daily
+
+raw -- 
+https://raw.githubusercontent.com/alanfgates/programmingpig/master/data/NYSE_daily
+https://raw.githubusercontent.com/alanfgates/programmingpig/master/data/README
+
+repo --https://github.com/alanfgates/programmingpig/tree/master/data
+
+movie lesn data
+
+url -- 
+http://files.grouplens.org/datasets/movielens/ml-100k.zip
