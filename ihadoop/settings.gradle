@@ -1,0 +1,3 @@
+include "hiveapp", "mapreduce", "my-lib", "product"
+
+rootProject.name = 'ihadoop'
