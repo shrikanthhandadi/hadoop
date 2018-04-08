@@ -13,22 +13,42 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import com.exp.ihadoop.hiveapp.core.HiveDataSource;
 import com.zaxxer.hikari.HikariDataSource;
 
+/**
+ * The ticket expires based on the kerberos settings, this means you should auto
+ * renew.
+ * 
+ * @author Shrikanth
+ *
+ */
 @Configuration
 @ComponentScan(basePackages = { "com.exp.ihadoop.hiveapp" })
 public class HiveAppConfig {
 
+	/**
+	 * You should have krb5.conf in default location of Java installation
+	 * <jre_home>/lib/security or <java_home>/conf/security for version 9 or set the
+	 * path manually by un-commenting below line.s
+	 */
 	static {
-		System.setProperty("sun.security.krb5.debug", "true");
-		System.setProperty("java.security.krb5.conf", "C:\\Users\\Shrikanth\\etc\\krb5.conf");
-		 
+		// System.setProperty("sun.security.krb5.debug", "true");
+		// System.setProperty("java.security.krb5.conf",
+		// "C:\\Users\\Shrikanth\\etc\\krb5.conf");
+
 		org.apache.hadoop.conf.Configuration conf = new org.apache.hadoop.conf.Configuration();
 		conf.set("hadoop.security.authentication", "Kerberos");
 		conf.addResource("src/main/resources/hive-site.xml");
-		UserGroupInformation.setConfiguration(conf);
 		try {
+			UserGroupInformation.setConfiguration(conf);
 			UserGroupInformation.loginUserFromKeytab("hiveuser", "src/main/resources/hiveuser.keytab");
+		} catch (IllegalArgumentException e) {
+			if (e.getMessage().equals("Can't get Kerberos realm")) {
+				System.out.println("Please make sure krb5.conf is there in default path");
+			}
+			e.printStackTrace();
+			throw e;
 		} catch (IOException e) {
 			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 	}
 

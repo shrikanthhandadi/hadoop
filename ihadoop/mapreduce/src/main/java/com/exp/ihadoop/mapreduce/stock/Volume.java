@@ -44,20 +44,6 @@ import org.apache.hadoop.util.ToolRunner;
 public class Volume extends Configured implements Tool {
 
 	public static void main(String[] args) throws Exception {
-		String a = "a";
-		String b = new String("aa");
-		b.intern();
-		String c = "aa";
-		if (a == b) {
-			System.err.println("aaa");
-		}
-		if (a == c) {
-			System.err.println("ccc");
-		}
-		if (b == c) {
-			System.err.println("bbb");
-		}
-
 		int ret = ToolRunner.run(new Volume(), args);
 		System.exit(ret);
 	}

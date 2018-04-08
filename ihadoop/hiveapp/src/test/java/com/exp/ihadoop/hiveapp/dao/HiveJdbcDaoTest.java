@@ -21,7 +21,7 @@ public class HiveJdbcDaoTest {
 
 	@Test
 	public void testExecuteQuery() {
-		List<Map<String, Object>> out = jdbcDao.selectQuery("select * from tab");
+		List<Map<String, Object>> out = jdbcDao.selectQuery("select * from bigleaf");
 		for (Map<String, Object> map : out) {
 			for (Entry<String, Object> entry : map.entrySet()) {
 				System.out.println(entry.getKey() + " : " + entry.getValue());
